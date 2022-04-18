@@ -1,0 +1,73 @@
+﻿@*Using ViewModel*@
+@model WebAppOceanShop.ViewModel.TProductViewModel
+
+@{
+    ViewData["Title"] = "商品清單 - 新增";
+}
+
+<h1>商品清單 - 新增</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+              <div class="form-group">
+                    <label  asp-for="FCategory" class="control-label"></label>
+                    <select name="FCategory" class="form-control" asp-items="Model.CategoryselectListItem">
+                        <option disabled selected> --- 請選擇分類 --- </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="FPid" class="control-label"></label>
+                    <input asp-for="FPid" class="form-control" name="FPid" value=""/>
+                    <span asp-validation-for="FPid" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="FName" class="control-label"></label>
+                    <input asp-for="FName" class="form-control" name="FName" value="" />
+                    <span asp-validation-for="FName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="FDescription" class="control-label" ></label>
+                    <textarea asp-for="FDescription" class="form-control" type="text" rows="3" name="FDescription" id="FDescription" value=""></textarea>
+                    <span asp-validation-for="FDescription" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="FPrice" class="control-label" for="FPrice"></label>
+                    <input asp-for="FPrice" class="form-control" type="text" name="FPrice" id="FPrice" value="" />
+                    <span asp-validation-for="FPrice" class="text-danger"></span>
+                </div>
+
+                @*This is to Upload IFormFile, not file string.*@
+                <div class="form-group">
+                    <label asp-for="FImage" class="control-label"></label>
+                    <input asp-for="FImage" class="form-control" type="file" name="FImage" id="FImage" />
+                    <span asp-validation-for="FImage" class="text-danger"></span>
+                </div>
+
+
+                <p></p>
+
+                <div class="form-group">
+                   <button type="submit" class="btn btn-outline-primary">確定</button>
+                    |
+                    <a href="/Admin/Index" class="btn btn-outline-info">取消</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+   @* Must use this script for input validation*@
+@section scripts{
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    }
+
+

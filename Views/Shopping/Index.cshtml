@@ -1,0 +1,60 @@
+﻿@*Using ViewModel IEnumerable*@
+@model IEnumerable<WebAppOceanShop.ViewModel.ShoppingViewModel>
+
+    @{
+        ViewData["Title"] = "商品購物頁面";
+    }
+
+<h2 class="text-center">商品列表</h2>
+
+@section scripts{
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+        <script>
+        function ShowMessage() {
+            toastr["success"]("商品已加入購物車！");
+             }
+    </script>
+}
+
+<div class="container" style="display:flex; flex-wrap:wrap">
+    
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4" style="border: 2px solid black">
+
+            <div class="container" >
+               <div class="col-md-12" style="text-align: center; border-bottom: 2px solid maroon">
+                    <h4>@item.FName</h4>
+                </div>
+            </div>
+
+            <div class="container" style="display:flex">
+                <div class="col-md-8">
+                    <img src="@Url.Content(item.FImagePath)" width="150" height="150" />
+                </div>
+
+                <div class="col-md-4" style="text-align: left">
+                    <b>@item.FDescription</b>
+                </div>
+            </div>
+
+            <div class="container" style="display:flex">
+                <div class="col-md-4" style="font-size: 18px; border-top: 2px solid maroon; padding: 2px">
+                    <b>單價 @item.FPrice.ToString("$###,###")</b>
+                </div>
+
+                <div class="col-md-8" style="text-align: right; margin-bottom: 10px; border-top: 2px solid maroon; padding: 2px">
+
+                    <input type="button" name="AddToCart" value="加入購物車" class="btn btn-primary" 
+                           itemid="@item.FId" id="btnAddToCart" onclick="AddToCart(this)" />
+
+                    @*<a class="btn btn-primary" onclick="ShowMessage()"  asp-controller="Shopping" asp-action="AddtoCart" 
+                            asp-route-Id="@item.FId">加入購物車</a>*@
+
+
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
